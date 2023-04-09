@@ -14,6 +14,8 @@
 import random
 import typing
 import numpy
+from django.utils import simplejson
+from django.http import HttpResponse
 
 # Ranking:
 # 1: Larger Snake
@@ -37,16 +39,16 @@ len_you = 0
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
 # TIP: If you open your Battlesnake URL in a browser you should see this data
-def info() -> typing.Dict:
+def info(request):
     print("INFO")
-
-    return {
+    to_json = {
         "apiversion": "1",
         "author": "",  # TODO: Your Battlesnake Username
         "color": "#035E43",  # TODO: Choose color
         "head": "all-seeing",  # TODO: Choose head
         "tail": "do-sammy",  # TODO: Choose tail
     }
+    return HttpResponse(simplejson.dumps(to_json), mimetype='application/json')
 
 
 # start is called when your Battlesnake begins a game
