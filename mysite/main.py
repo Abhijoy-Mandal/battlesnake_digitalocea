@@ -17,6 +17,7 @@ import numpy
 from django.http import JsonResponse
 from django.http import HttpResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 # Ranking:
 # 1: Larger Snake
@@ -40,6 +41,7 @@ len_you = 0
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
 # TIP: If you open your Battlesnake URL in a browser you should see this data
+@csrf_exempt
 def info(request):
     print("INFO")
     to_json = {
@@ -53,12 +55,14 @@ def info(request):
 
 
 # start is called when your Battlesnake begins a game
+@csrf_exempt
 def start(request):
     print("GAME START")
     return HttpResponse("OK")
 
 
 # end is called when your Battlesnake finishes a game
+@csrf_exempt
 def end(request):
     print("GAME OVER\n")
     return HttpResponse("OK")
@@ -67,6 +71,7 @@ def end(request):
 # move is called on every turn and returns your next move
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
+@csrf_exempt
 def move(request):
     game_state = json.loads(request.body)
     game_state = game_state["data"]
