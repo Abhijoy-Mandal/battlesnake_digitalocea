@@ -57,15 +57,17 @@ def info(request):
 # start is called when your Battlesnake begins a game
 @csrf_exempt
 def start(request):
-    print("GAME START")
-    return HttpResponse("OK")
+    if request.method=='POST':
+        print("GAME START")
+        return HttpResponse(status=200)
 
 
 # end is called when your Battlesnake finishes a game
 @csrf_exempt
 def end(request):
-    print("GAME OVER\n")
-    return HttpResponse("OK")
+    if request.method=='POST':
+        print("GAME OVER\n")
+        return HttpResponse(status=200)
 
 
 # move is called on every turn and returns your next move
