@@ -16,6 +16,7 @@ import typing
 import numpy
 from django.http import JsonResponse
 from django.http import HttpResponse
+import json
 
 # Ranking:
 # 1: Larger Snake
@@ -52,19 +53,21 @@ def info(request):
 
 
 # start is called when your Battlesnake begins a game
-def start(game_state: typing.Dict):
+def start(request):
     print("GAME START")
 
 
 # end is called when your Battlesnake finishes a game
-def end(game_state: typing.Dict):
+def end(request):
     print("GAME OVER\n")
 
 
 # move is called on every turn and returns your next move
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
-def move(game_state: typing.Dict) -> typing.Dict:
+def move(request):
+    game_state = json.loads(request.body)
+    game_state = game_state["data"]
     # float('-inf')  Replace false
     # any number not negative infinity replace true
 
@@ -107,7 +110,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
-        return {"move": "down"}
+        return JsonResponse({"move": "down"})
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     # food = game_state['board']['food']
     # spaces = floodFill(map, game_Width, game_Height, my_head["x"], my_head["y"])
@@ -147,7 +150,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             # print(game_state["you"]["id"])
     # print(type(game_state["you"]["id"]))
     print(f"MOVE {game_state['turn']}: {next_move}")
-    return {"move": next_move}
+    return JsonResponse({"move": next_move})
 
 
 # Start server when `python main.py` is run
