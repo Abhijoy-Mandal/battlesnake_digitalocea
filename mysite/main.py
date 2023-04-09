@@ -75,6 +75,7 @@ def end(request):
 # See https://docs.battlesnake.com/api/example-move for available data
 @csrf_exempt
 def move(request):
+    print(request.body)
     game_state = json.loads(request.body)
     game_state = game_state["data"]
     # float('-inf')  Replace false
