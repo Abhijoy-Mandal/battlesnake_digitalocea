@@ -14,7 +14,7 @@
 import random
 import typing
 import numpy
-from django.utils import simplejson
+from django.http import JsonResponse
 from django.http import HttpResponse
 
 # Ranking:
@@ -48,7 +48,7 @@ def info(request):
         "head": "all-seeing",  # TODO: Choose head
         "tail": "do-sammy",  # TODO: Choose tail
     }
-    return HttpResponse(simplejson.dumps(to_json), mimetype='application/json')
+    return JsonResponse(to_json)
 
 
 # start is called when your Battlesnake begins a game
