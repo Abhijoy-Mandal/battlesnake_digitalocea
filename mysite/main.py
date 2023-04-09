@@ -55,11 +55,13 @@ def info(request):
 # start is called when your Battlesnake begins a game
 def start(request):
     print("GAME START")
+    return HttpResponse("OK")
 
 
 # end is called when your Battlesnake finishes a game
 def end(request):
     print("GAME OVER\n")
+    return HttpResponse("OK")
 
 
 # move is called on every turn and returns your next move
