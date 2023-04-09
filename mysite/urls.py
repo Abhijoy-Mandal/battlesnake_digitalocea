@@ -18,11 +18,8 @@ from django.urls import include, path
 from . import main
 
 urlpatterns = [
-    path("info/", main.info, name="info"),
+    path("", main.info, name="info"),
     path("start/", main.start, name="start"),
     path("end/", main.end, name="end"),
     path("move/", main.move, name="move"),
-    path("polls/", include("polls.urls")),
-    path("admin/", admin.site.urls),
-    path("", include("frontpage.urls")),
 ]
